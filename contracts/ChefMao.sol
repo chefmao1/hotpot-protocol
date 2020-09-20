@@ -304,8 +304,8 @@ contract ChefMao {
 		FixedPoint.uq112x112 memory priceAverage = FixedPoint.uq112x112(
 			uint224((priceCumulative - priceCumulativeLast) / timeElapsed)
 		);
-
-		twap = FixedPoint.decode144(FixedPoint.mul(priceAverage, 1e18));
+		// 1e30 for trading pair with 6-decimal tokens. Be ultra-cautious when changing this.
+		twap = FixedPoint.decode144(FixedPoint.mul(priceAverage, 1e30));
 	}
 
 	// Computes new tokenPerBlock based on price.
